@@ -55,7 +55,6 @@
   opacity: 70%;
   line-height: 1;
   gap: 8px;
-  cursor: pointer;
 }
 
 .profile__add-btn {
@@ -69,12 +68,18 @@
   width: 149px;
   align-self: self-end;
   border-radius: 8px;
-  cursor: pointer;
   border-radius: 8px;
+  border: none;
 }
 
-.profile__edit-btn-image {
-  padding-right: 10px;
+.profile__add-btn:hover {
+  background-color: rgba(33, 33, 33, 0.8);
+  cursor: pointer;
+}
+
+.profile__edit-btn:hover {
+  color: rgba(33, 33, 33, 0.8);
+  cursor: pointer;
 }
 
 .profile__add-btn-image {
