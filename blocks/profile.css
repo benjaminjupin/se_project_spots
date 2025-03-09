@@ -73,13 +73,13 @@
 }
 
 .profile__add-btn:hover {
-  background-color: rgba(33, 33, 33, 0.8);
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .profile__edit-btn:hover {
-  color: rgba(33, 33, 33, 0.8);
   cursor: pointer;
+  opacity: 1;
 }
 
 .profile__add-btn-image {
