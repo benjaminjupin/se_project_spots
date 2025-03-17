@@ -1,6 +1,6 @@
 # Spots
 
-images sharing website about bessie coleman and places she has been and shared witht he world
+images sharing website about bessie coleman
 
 ## description
 
