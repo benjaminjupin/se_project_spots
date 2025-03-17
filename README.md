@@ -22,4 +22,4 @@ this webpage is deployed to github pages
 
 - [depolyment link](:https://github.com/benjaminjupin/se_project_spots)
 
-- [video link] (https://www.loom.com/share/f05ac61397a94e0894191a3224165d3f?sid=2dadffa3-897a-48bf-915a-18f695c653d6)
+- [video link] (https://www.loom.com/share/8be267def0d448bf828f1be2d5fe05cf?sid=90908f31-ba52-4145-951c-4371535c4320)
