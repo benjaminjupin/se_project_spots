@@ -71,12 +71,12 @@
   font-size: 20px;
   line-height: 100%;
   border-radius: 8px;
-  opacity: 40%;
   border: 1px solid rgba(33, 33, 33, 0.4);
 }
 
 .modal__input:hover {
   cursor: pointer;
+  border: 1px solid rgba(33, 33, 33, 1);
 }
 
 .modal__submit-btn {
