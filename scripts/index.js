@@ -1,3 +1,5 @@
+
+
 const intialCards = [
   {
     name: "Val Thorens",
@@ -82,3 +84,8 @@ for (let i = 0; i < intialCards.length; i++) {
   const cardElement = getCardElement(intialCards[i]);
   cardsList.prepend(cardElement);
 }
+
+intialCards.foreach (function (item) {
+  console.log(item.name);
+  console.log(item.link);
+})
