@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Benjamin Jupin" />
+    <meta name="description" content="coffee shop" />
+    <meta name="keywords" content="html, style.css, Coding" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Bessie Coleman</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img
+          src="<%=require('./images/logo_(3).svg')%>"
+          alt="Spots Logo"
+          class="header__logo"
+        />
+      </header>
+      <main class="content">
+        <section class="profile page__section">
+          <div class="profile__avatar-container">
+          <button class="profile__avatar-btn"> 
+            <img
+            src="<%=require('./images/editAvatarPencil.svg')%>"
+            alt="pencil icon"
+            class="profile__pencil-icon"
+          />
+          </button>
+          <img
+            src="<%=require('./images/avatar.jpg')%>"
+            alt="Bessie Coleman"
+            class="profile__avatar"
+          />
+          </div>
+          <div class="profile__column">
+            <h1 class="profile__name">Bessie Coleman</h1>
+            <p class="profile__description">Civil Aviator</p>
+            <button type="button" class="profile__edit-btn">
+              <img
+                src="<%=require('./images/group_2.svg')%>"
+                alt="Pencil"
+                class="profile__edit-btn-image"
+              />Edit Profile
+            </button>
+          </div>
+          <button type="button" class="profile__add-btn">
+            <img
+              src="<%=require('./images/group_26(1).svg')%>"
+              alt="Plus icon"
+              class="profile__add-btn-image"
+            />New Post
+          </button>
+        </section>
+        <section class="cards page__section">
+          <ul class="cards__list">
+            <template id="card-template">
+              <li class="card">
+                <button class="card__delete-btn" type="button"></button>
+                <img src="" alt="" class="card__image" />
+                <div class="card__footer">
+                  <h2 class="card__title"></h2>
+                  <button type="button" class="card__like-btn"></button>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">2025 &copy; Spots</p>
+      </footer>
+      <div class="modal" id="newpost-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn">
+            <img
+              src="<%=require('./images/Group27.svg')%>"
+              alt="Exit"
+              class="modal__close-img"
+            />
+          </button>
+          <h2 class="modal__title">New Post</h2>
+          <form id="post-form" name="new post" class="modal__form" novalidate>
+            <label for="image-link-input" class="modal__label">
+              Image Link
+              <input
+                id="image-link-input"
+                type="url"
+                class="modal__input"
+                placeholder="Paste A Link To The Picture"
+                required
+              />
+              <span id="image-link-input-error" class="modal__error"></span>
+            </label>
+            <label for="profile-caption-input" class="modal__label">
+              Image Caption
+              <input
+                id="profile-caption-input"
+                type="text"
+                class="modal__input"
+                placeholder="Type Your Caption"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span  id="profile-caption-input-error"  class="modal__error"></span>
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal" id="edit-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn">
+            <img
+              src="<%=require('./images/Group27.svg')%>"
+              alt="Exit"
+              class="modal__close-img"
+            />
+          </button>
+          <h2 class="modal__title">Edit Profile</h2>
+          <form id="profile-form" name="edit profile" class="modal__form" novalidate>
+            <label for="profile-name-input" class="modal__label">
+              Name
+              <input
+                id="profile-name-input"
+                type="text"
+                class="modal__input"
+                placeholder="Type your name"
+                minlength="2"
+                maxlength="40"
+                required
+              /> 
+              <span  id="profile-name-input-error" class="modal__error"></span>
+            </label>
+            <label for="profile-description-input" class="modal__label">
+              Description
+              <input
+                id="profile-description-input"
+                type="text"
+                class="modal__input"
+                placeholder="Description"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span id="profile-description-input-error" class="modal__error"></span>
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal" id="delete-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn">
+            <img
+              src="<%=require('./images/Group27.svg')%>"
+              alt="Exit"
+              class="modal__close-img"
+            />
+          </button>
+          <h2 class="modal__title">Are you sure you want to delete this post?</h2>
+          <form id="delete-form" name="delete card" class="modal__form" novalidate>
+            <button type="submit" class="modal__submit-btn">Delete</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal" id="avatar-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-btn">
+            <img
+              src="<%=require('./images/Group27.svg')%>"
+              alt="Exit"
+              class="modal__close-img"
+            />
+          </button>
+          <h2 class="modal__title">Change Profile Picture</h2>
+          <form id="avatar-form" name="update avatar" class="modal__form" novalidate>
+            <label for="avatar-link-input" class="modal__label">
+              Image Link
+              <input
+                id="avatar-link-input"
+                type="url"
+                class="modal__input"
+                placeholder="Paste A Link To The Picture"
+                required
+              />
+              <span id="avatar-link-input-error" class="modal__error"></span>
+            </label>
+            <button type="submit" class="modal__submit-btn">Save</button>
+          </form>
+        </div>
+      </div> 
+    
+    </div>
+    <div class="modal modal_type_preview" id="preview-modal">
+      <div class="modal__image-container">
+        <button
+          class="modal__close-btn modal__close-btn_type_preview"
+          type="button"
+        >
+          <img
+            src="<%=require('./images/Property1Variant3.svg')%>"
+            alt="Exit"
+            class="modal__close-img"
+          />
+        </button>
+        <img src="#" alt="" class="modal__image" />
+        <p class="modal__caption">Golden Gate Bridge</p>
+      </div>
+    </div>
+  </body>
+</html>
