@@ -7,37 +7,6 @@ import {
 } from "../scripts/validation.js";
 import Api from "../utils/Api.js";
 
-// - TODO - lined out initialcards but didnt delete in case needs to be undo
-/*const initialCards = [
-  {
-    name: "golden gate bridge",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
-  },
-  {
-    name: "Val Thorens",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-  {
-    name: "Restaurant terrace",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-  },
-  {
-    name: "An outdoor cafe",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-  },
-  {
-    name: "A very long bridge, over the forest and through the trees",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-  },
-  {
-    name: "Tunnel with morning light",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-  },
-  {
-    name: "Mountain house",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-];*/
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -129,6 +98,15 @@ function openModal(modal) {
   modal.addEventListener("mousedown", handleOverlayClose);
 }
 
+function setButtonLoading(button, loadingText, originalText) {
+  button.textContent = loadingText;
+  button.disabled = true;
+  return function () {
+    button.textContent = originalText;
+    button.disabled = false;
+  };
+}
+
 editProfileBtn.addEventListener("click", function () {
   nameProfileInput.value = profileNameEl.textContent;
   editModalDescriptionInput.value = profileDescriptionEl.textContent;
@@ -147,6 +125,7 @@ editProfileBtn.addEventListener("click", function () {
 
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
+  const restore = setButtonLoading(profileFormSubmitBtn, "Saving...", "Save");
   api
     .editUserInfo({
       name: nameProfileInput.value,
@@ -157,7 +136,8 @@ function handleEditProfileSubmit(evt) {
       profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(restore);
 }
 
 editProfileCloseBtn.addEventListener("click", function () {
@@ -189,13 +169,19 @@ function handleDeleteCard(cardElement, data) {
 }
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
+  const restore = setButtonLoading(
+    deleteForm.querySelector(".modal__submit-btn"),
+    "Deleting...",
+    "Delete",
+  );
   api
     .removeCard(selectedCardId)
     .then(() => {
       selectedCard.remove();
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(restore);
 }
 deleteCloseBtn.addEventListener("click", function () {
   closeModal(deleteModal);
@@ -216,13 +202,19 @@ avatarCloseBtn.addEventListener("click", function () {
 });
 avatarForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  const restore = setButtonLoading(
+    avatarForm.querySelector(".modal__submit-btn"),
+    "Saving...",
+    "Save",
+  );
   api
     .updateAvatar(avatarLinkInput.value)
     .then(() => {
       profileAvatarEl.src = avatarLinkInput.value;
       closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(restore);
 });
 
 function handleOverlayClose(evt) {
@@ -283,6 +275,8 @@ editPostForm.addEventListener("submit", function (evt) {
     link: imageLinkInput.value,
   };
 
+  const restore = setButtonLoading(modalNewSubmitBtn, "Saving...", "Save");
+
   api
     .addCard(inputValues)
     .then((data) => {
@@ -291,7 +285,8 @@ editPostForm.addEventListener("submit", function (evt) {
       evt.target.reset();
       closeModal(editNewPost);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(restore);
 });
 
 function handleEscapeKey(evt) {
